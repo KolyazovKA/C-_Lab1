@@ -8,22 +8,23 @@ class Program
         double currentValue = 0;
         //Предыдущее введенное значение
         double lastValue = 0;
+        //Вводимый оператор
         char operation = ' ';
         //Переменная обозначающая ввод нового числа или оператора
         bool isNewInput = true;
 
         Console.WriteLine("=======Калькулятор=======");
-        Console.WriteLine("Введите числа и операции: ");
 
         while (true)
         {
-            Console.SetCursorPosition(0, 2);
+            //Console.SetCursorPosition(0, 2);
             Console.Write($"Текущая сумма: {currentValue} ");
             Console.WriteLine("\nВведите число или операцию:");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             char input = keyInfo.KeyChar;
 
+            //Ввод числа
             if (char.IsDigit(input))
             {
                 int digit = input - '0';
@@ -37,6 +38,7 @@ class Program
                     currentValue = currentValue * 10 + digit;
                 }
             }
+            //Очищение калькулятора
             else if (input == 'C')
             {
                 currentValue = 0;
@@ -44,6 +46,7 @@ class Program
                 operation = ' ';
                 isNewInput = true;
             }
+            //Ввод оператора
             else if (input == '+' || input == '-' || input == '*' || input == '/')
             {
                 if (operation != ' ')
@@ -55,6 +58,7 @@ class Program
                 currentValue = 0;
                 isNewInput = true;
             }
+            // Выполнение опрации
             else if (input == '=')
             {
                 Calculate(ref lastValue, ref currentValue, operation);
@@ -68,6 +72,9 @@ class Program
 
     static void Calculate(ref double lastValue, ref double currentValue, char operation)
     {
+        /*
+        Основная логика калькулятора
+        */
         switch (operation)
         {
             case '+':
